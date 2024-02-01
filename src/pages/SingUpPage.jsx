@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -50,11 +50,18 @@ const SingUpPage = () => {
         }else{
             createUserWithEmailAndPassword(auth, email, password)
             .then((user) => {
-                notify()
+                updateProfile(auth.currentUser, {
+                    displayName: name, 
+                  }).then(() => {
+                    notify()
                     setTimeout(() => {
                         navigate('/')
                         
                     }, 2000);
+                  }).catch((error) => {
+                    setError(error.code)
+                  });
+               
 
             })
             .catch((error) => {

@@ -1,6 +1,6 @@
 import React ,{useState}from 'react'
 import { Link, json } from 'react-router-dom'
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword  } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userLoginInfo } from '../slices/userSlice';
@@ -43,10 +43,12 @@ const LoginPage = () => {
         }else{
             signInWithEmailAndPassword(auth, email, password)
             .then((user) => {
+                
                console.log(user)
                dispatch(userLoginInfo(user.user))
                localStorage.setItem('userInfo',JSON.stringify(user.user))
                notify()
+
                setTimeout(() => {
                    navigate('/home')
                }, 2000);

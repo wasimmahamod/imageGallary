@@ -76,6 +76,7 @@ const HomePage = () => {
         <div className='mainDiv  '>
             <ToastContainer />
             <div>
+                <h1>Welcome :  {data.displayName}</h1>
                 <input onChange={handleImage} type="file" /> <br />
                 <Button onClick={handleUpdate} className='button' variant="primary">Upload Image</Button>{' '}
                 <Button onClick={handleLogout} className='button' variant="danger">Logout</Button>{' '}
